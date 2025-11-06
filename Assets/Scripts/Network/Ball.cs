@@ -19,4 +19,14 @@ public class Ball : NetworkBehaviour
         else
             transform.position += BulletSpeed * transform.forward * Runner.DeltaTime;
     }
+
+    public void OnCollisionEnter()
+    {
+        Runner.Despawn(Object);
+    }
+
+    public void OnTriggerEnter()
+    {
+        Runner.Despawn(Object);
+    }
 }

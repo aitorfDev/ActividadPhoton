@@ -5,6 +5,8 @@ public class LocalVisibilityHandler : NetworkBehaviour
 {
     // Drag the MeshRenderer component of the "nose" object here in the Inspector.
     [SerializeField] private MeshRenderer noseRenderer;
+    [SerializeField] private MeshRenderer eyeRenderer;
+    [SerializeField] private MeshRenderer eye2Renderer;
     [SerializeField] private GameObject camera;
 
 
@@ -17,6 +19,8 @@ public class LocalVisibilityHandler : NetworkBehaviour
             if (noseRenderer != null)
             {
                 noseRenderer.enabled = false;
+                eyeRenderer.enabled = false;
+                eye2Renderer.enabled = false;
                 camera.SetActive(true);
             }
         }
@@ -27,6 +31,8 @@ public class LocalVisibilityHandler : NetworkBehaviour
                 if (noseRenderer != null)
                 {
                     noseRenderer.enabled = true;
+                    eyeRenderer.enabled = true;
+                    eye2Renderer.enabled = true;
                     camera.SetActive(false);
                 }
             }

@@ -57,7 +57,7 @@ public class PlayerMovement : NetworkBehaviour
 
                     // Usar la dirección del objeto "characterForward"
                     Vector3 shootDir = characterForward.forward;
-                    Vector3 spawnPos = characterForward.position + shootDir * 1.0f; // offset opcional
+                    Vector3 spawnPos = characterForward.position + shootDir * 1.5f; // offset opcional
 
                     Debug.Log(spawnPos.ToString());
 
