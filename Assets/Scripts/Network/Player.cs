@@ -65,7 +65,7 @@ public class PlayerMovement : NetworkBehaviour
                         _prefabBall,
                         spawnPos,
                         Quaternion.LookRotation(shootDir),
-                        Object.InputAuthority,
+                        Object.StateAuthority,
                         (runner, o) =>
                         {
                             o.GetComponent<Ball>().Init();

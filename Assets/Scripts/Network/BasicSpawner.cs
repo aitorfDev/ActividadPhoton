@@ -81,7 +81,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         if (runner.IsServer)
         {
             // Seleccionar punto de aparición
-            Vector3 spawnPosition = spawnpoints[loggedPlayers / 2].position;
+            Vector3 spawnPosition = spawnpoints[loggedPlayers % 2].position;
 
             NetworkObject networkPlayerObject = runner.Spawn(
                 _playerPrefab,
