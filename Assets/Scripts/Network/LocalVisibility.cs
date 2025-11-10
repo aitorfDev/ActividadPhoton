@@ -7,7 +7,7 @@ public class LocalVisibilityHandler : NetworkBehaviour
     [SerializeField] private MeshRenderer noseRenderer;
     [SerializeField] private MeshRenderer eyeRenderer;
     [SerializeField] private MeshRenderer eye2Renderer;
-    [SerializeField] private GameObject camera;
+    //[SerializeField] private GameObject camera;
 
 
     // This method is called when the object is spawned and set up on the network.
@@ -21,7 +21,7 @@ public class LocalVisibilityHandler : NetworkBehaviour
                 noseRenderer.enabled = false;
                 eyeRenderer.enabled = false;
                 eye2Renderer.enabled = false;
-                camera.SetActive(true);
+                //camera.SetActive(true);
             }
         }
 
@@ -33,7 +33,7 @@ public class LocalVisibilityHandler : NetworkBehaviour
                     noseRenderer.enabled = true;
                     eyeRenderer.enabled = true;
                     eye2Renderer.enabled = true;
-                    camera.SetActive(false);
+                    //camera.SetActive(false);
                 }
             }
     }

@@ -1,11 +1,11 @@
 using Fusion;
-using UnityEngine;
+
 public struct NetworkInputData : INetworkInput
 {
-    public const byte MOUSEBUTTON0 = 1;
+    public const byte MOUSEBUTTON0 = 0;
+    public const byte JUMP = 1;
 
-    public NetworkButtons buttons;
-    public float move; // adelante / atrás (W/S)
-    public float turn; // rotación (A/D)
+    public float move;    // Adelante / atrás (W/S)
+    public float strafe;  // Izquierda / derecha (A/D)
+    public NetworkButtons buttons; // Botones (salto, disparo, etc.)
 }
-

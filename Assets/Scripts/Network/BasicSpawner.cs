@@ -1,4 +1,4 @@
-using ExitGames.Client.Photon.StructWrapping;
+ï»¿using ExitGames.Client.Photon.StructWrapping;
 using Fusion;
 using Fusion.Sockets;
 using System;
@@ -30,11 +30,11 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     private async void StartGame(GameMode mode)
     {
-        // Crear el Fusion runner y activar el envío de input
+        // Crear el Fusion runner y activar el envÃ­o de input
         _runner = gameObject.AddComponent<NetworkRunner>();
         _runner.ProvideInput = true;
 
-        // Crear información de la escena actual
+        // Crear informaciÃ³n de la escena actual
         var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
         var sceneInfo = new NetworkSceneInfo();
 
@@ -43,7 +43,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
         }
 
-        // Iniciar o unirse a una sesión (según el modo seleccionado)
+        // Iniciar o unirse a una sesiÃ³n (segÃºn el modo seleccionado)
         await _runner.StartGame(new StartGameArgs()
         {
             GameMode = mode,
@@ -80,7 +80,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
         if (runner.IsServer)
         {
-            // Seleccionar punto de aparición
+            // Seleccionar punto de apariciÃ³n
             Vector3 spawnPosition = spawnpoints[loggedPlayers % 2].position;
 
             NetworkObject networkPlayerObject = runner.Spawn(
@@ -108,21 +108,26 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         var data = new NetworkInputData();
 
-        // Movimiento básico
-        if (Keyboard.current.wKey.isPressed) data.move += 1;  // adelante
-        if (Keyboard.current.sKey.isPressed) data.move -= 1;  // atrás
-        if (Keyboard.current.aKey.isPressed) data.turn -= 1;  // gira izquierda
-        if (Keyboard.current.dKey.isPressed) data.turn += 1;  // gira derecha
+        // Movimiento adelante / atrÃ¡s
+        if (Keyboard.current.wKey.isPressed) data.move += 1;
+        if (Keyboard.current.sKey.isPressed) data.move -= 1;
 
-        // Disparo con el botón izquierdo del ratón
+        // Strafing izquierda / derecha
+        if (Keyboard.current.aKey.isPressed) data.strafe -= 1; // A = izquierda
+        if (Keyboard.current.dKey.isPressed) data.strafe += 1; // D = derecha
+
+        // Disparo
         if (Mouse.current.leftButton.isPressed)
-        {
-            Debug.Log("Mouse Button 0 pressed");
             data.buttons.Set(NetworkInputData.MOUSEBUTTON0, true);
-        }
+
+        // Salto
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            data.buttons.Set(NetworkInputData.JUMP, true);
 
         input.Set(data);
     }
+
+
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
