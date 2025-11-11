@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 592304731643585787}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.474, z: 0.0126}
-  m_LocalScale: {x: 1, y: 1.2, z: 1}
+  m_LocalPosition: {x: 0, y: -0.36, z: 0.0126}
+  m_LocalScale: {x: 1, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3625482804201292386}
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592304731643585787}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3874900379228858758
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -640,9 +640,8 @@ GameObject:
   - component: {fileID: 7246830364512010705}
   - component: {fileID: 530877366884418412}
   - component: {fileID: 6146797157815109208}
-  - component: {fileID: 757279119704440870}
   m_Layer: 0
-  m_Name: CamPos
+  m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,8 +671,8 @@ Camera:
   m_GameObject: {fileID: 2649829514350976666}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -758,24 +757,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &757279119704440870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2649829514350976666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54027d8c7d233674c8e40db013c132ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCam
-  sensX: 20
-  sensY: 20
-  orientation: {fileID: 7432800223932737026}
-  headOrientation: {fileID: 1681979764976271394}
-  playerOrient: {fileID: 3625482804201292386}
-  cam: {fileID: 0}
 --- !u!1 &2694081766429916571
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +772,7 @@ GameObject:
   - component: {fileID: 2532206538727253753}
   - component: {fileID: 880043194695617686}
   - component: {fileID: 5437185942075749480}
+  - component: {fileID: 6994906569426796374}
   - component: {fileID: 5990831685723280268}
   - component: {fileID: 7486219632713072705}
   m_Layer: 0
@@ -874,10 +856,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421ae14d1f2ab43479e7b3e0b5167ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  playerOrient: {fileID: 3625482804201292386}
-  moveSpeed: 5
+  playerOrient: {fileID: 7432800223932737026}
+  moveSpeed: 6
   gravity: -9.81
-  jumpForce: 5
+  jumpForce: 6
 --- !u!114 &2532206538727253753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,7 +872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3c341d9439a194c868a8d0e42f12ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shoot
-  attackSpeed: 0.2
+  attackSpeed: 0.4
   _prefabBall: {fileID: 5466310815730678206, guid: 7f88e65033ca97d468c3f9d0a6841405, type: 3}
   shootingPos: {fileID: 7123393178088839596}
   shootingOffset: 0.3
@@ -925,6 +907,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTeam
   _Team: 0
+--- !u!114 &6994906569426796374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694081766429916571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54027d8c7d233674c8e40db013c132ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCam
+  sensX: 20
+  sensY: 20
+  headOrientation: {fileID: 1681979764976271394}
+  playerOrient: {fileID: 7432800223932737026}
+  cam: {fileID: 530877366884418412}
+  _HeadRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &5990831685723280268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,8 +947,8 @@ MonoBehaviour:
   - {fileID: 2532206538727253753}
   - {fileID: 880043194695617686}
   - {fileID: 5437185942075749480}
+  - {fileID: 6994906569426796374}
   - {fileID: 7486219632713072705}
-  - {fileID: 757279119704440870}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &7486219632713072705
 MonoBehaviour:
