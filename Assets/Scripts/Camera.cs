@@ -1,57 +1,70 @@
-using Fusion;
+ï»¿using Fusion;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerCam : NetworkBehaviour
 {
+    [Header("Sensitivity")]
     public float sensX = 100f;
     public float sensY = 100f;
 
-    public Transform orientation;
+    [Header("References")]
     public Transform headOrientation;
     public Transform playerOrient;
-    float xRotation;
-    float yRotation;
+    public Camera cam;
 
-    private void Start()
+    private float xRotation;
+    private float yRotation;
+
+    [Networked] public Quaternion HeadRot { get; set; }
+
+    public override void Spawned()
     {
-        // Solo la cámara local debe estar activa y controlar el ratón
+        if (cam == null)
+            TryGetComponent(out cam);
+
         if (Object.HasInputAuthority)
         {
+            cam.enabled = true;
+            var audio = cam.GetComponent<AudioListener>();
+            if (audio != null) audio.enabled = true;
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
         else
         {
-            // Desactiva la cámara del resto de jugadores
-            if (TryGetComponent<Camera>(out var cam))
-                cam.enabled = false;
+            if (cam != null) cam.enabled = false;
+            var audio = cam.GetComponent<AudioListener>();
+            if (audio != null) audio.enabled = false;
         }
     }
 
     private void Update()
     {
-        // Solo el jugador local controla su cámara
-        if (!Object.HasInputAuthority)
-            return;
-
-        // Nuevo Input System
-        float mouseX = 0f;
-        float mouseY = 0f;
-
-        if (Mouse.current != null)
+        if (Object.HasInputAuthority)
         {
-            mouseX = Mouse.current.delta.x.ReadValue() * sensX * Time.deltaTime;
-            mouseY = Mouse.current.delta.y.ReadValue() * sensY * Time.deltaTime;
+            Vector2 mouseDelta = Mouse.current != null ? Mouse.current.delta.ReadValue() : Vector2.zero;
+
+            yRotation += mouseDelta.x * sensX * Time.deltaTime;
+            xRotation -= mouseDelta.y * sensY * Time.deltaTime;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+            Quaternion newRot = Quaternion.Euler(xRotation, yRotation, 0);
+
+            headOrientation.rotation = newRot;
+            playerOrient.rotation = Quaternion.Euler(0, yRotation, 0);
+
+            HeadRot = newRot; // actualizar en red
         }
-
-        yRotation += mouseX;
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-        // Rotar cámara y orientación
-        transform.rotation = headOrientation.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-
-        playerOrient.rotation = Quaternion.Euler(0, yRotation, 0);
+        else
+        {
+            // InterpolaciÃ³n suave de cabeza para otros jugadores
+            headOrientation.rotation = Quaternion.Slerp(
+                headOrientation.rotation,
+                HeadRot,
+                15f * Time.deltaTime
+            );
+        }
     }
 }

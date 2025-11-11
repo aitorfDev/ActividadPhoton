@@ -775,6 +775,7 @@ MonoBehaviour:
   orientation: {fileID: 7432800223932737026}
   headOrientation: {fileID: 1681979764976271394}
   playerOrient: {fileID: 3625482804201292386}
+  cam: {fileID: 0}
 --- !u!1 &2694081766429916571
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +789,8 @@ GameObject:
   - component: {fileID: 2698464722003587359}
   - component: {fileID: 3920306765106688234}
   - component: {fileID: 2532206538727253753}
+  - component: {fileID: 880043194695617686}
+  - component: {fileID: 5437185942075749480}
   - component: {fileID: 5990831685723280268}
   - component: {fileID: 7486219632713072705}
   m_Layer: 0
@@ -891,6 +894,37 @@ MonoBehaviour:
   _prefabBall: {fileID: 5466310815730678206, guid: 7f88e65033ca97d468c3f9d0a6841405, type: 3}
   shootingPos: {fileID: 7123393178088839596}
   shootingOffset: 0.3
+--- !u!114 &880043194695617686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694081766429916571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377ff61ac6501574188689a3d1cbcd2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTeamMaterial
+  bodyRenderer: {fileID: 3874900379228858758}
+  weaponPart1: {fileID: 7834025571588045229}
+  weaponPart2: {fileID: 2629248058837741593}
+  weaponPart3: {fileID: 1160843492803394681}
+  redMaterial: {fileID: 2100000, guid: 21a4fd62739265048ae2d8e9b83928ea, type: 2}
+  blueMaterial: {fileID: 2100000, guid: ae520743ea1a9264d9067826280ea046, type: 2}
+--- !u!114 &5437185942075749480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694081766429916571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd7246e4a088b447adcd10aaf896f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTeam
+  _Team: 0
 --- !u!114 &5990831685723280268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,6 +945,8 @@ MonoBehaviour:
   - {fileID: 2698464722003587359}
   - {fileID: 3920306765106688234}
   - {fileID: 2532206538727253753}
+  - {fileID: 880043194695617686}
+  - {fileID: 5437185942075749480}
   - {fileID: 7486219632713072705}
   - {fileID: 757279119704440870}
   ForceRemoteRenderTimeframe: 0
@@ -1337,7 +1373,7 @@ GameObject:
   - component: {fileID: 7863296132264547964}
   - component: {fileID: 1160843492803394681}
   m_Layer: 0
-  m_Name: Tube
+  m_Name: Bridle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
